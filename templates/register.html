@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="stylesheet" href={{url_for('static',filename='css/style1.css')}}>
+
+    <script src="{{url_for('static',filename='js/showHide.js')}}"></script>
+</head>
+
+<body>
+    <section class="sec">
+        <a href="\" class="abs"><h4 class='' style="font-size: 50px;text-transform: none; filter: brightness(100); padding: 20px 0 0 20px;"><img
+			style='height: 65px; width: 65px; margin-right: 4px;' src='{{url_for('static',filename='images/onlysquirrel1 copy.png')}}' />bookbuddy
+	</h4></a>
+        <div class="form-container">
+            <h1>Register</h1>
+            <form action="" method="post">
+                <div class="control">
+                    <label for="name">Name</label>
+                    <input class="" type="text" name="name" id="name" placeholder="Name" value="">
+                </div>
+                <div class="control">
+                    <label for="phone">Phone No.</label>
+                    <input class="" type="text" name="phone" id="phone" placeholder="Phone Number" value="">
+                </div>
+                <div class="control">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" placeholder="Email-Address">
+                </div>
+                <div class="control">
+                    <label for="psw">Password</label>
+                    <input class="" type="password" placeholder="********" name="password" id="pass" value=""
+                        required />
+                </div>
+                <div class="control">
+                    <label for="psw">Confirm Password</label>
+                    <input class="" type="password" placeholder="********" name="confirm_password" id="rpass" value=""
+                        required />
+                </div>
+                <a href="javascript:showHide();" class="txt">
+                    <i class="fa fa-eye" id="eye"><span id="passstage"> Show</span></i>
+                </a>
+                <div class="control">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+            <div class="link">
+                <a href="/login">Have an account? Login</a>
+            </div>
+        </div>
+</body>
+
+</html>

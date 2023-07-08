@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+  * {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    color: #fff;
+  }
+  .sec {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background: url("b.jpg");
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    background-position: center center;
+  }
+  .form-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* padding: 0px; */
+    transform: translate(-50%, -50%);
+    background-color: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+    width: 480px;
+    padding: 30px 60px;
+    border-radius: 10px;
+    box-shadow: 7px 7px 60px #000;
+  }
+  h1 {
+    text-transform: uppercase;
+    /* font-size: 2em; */
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .control input {
+    background-color: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+    width: 100%;
+    display: block;
+    padding: 10px;
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    margin: 1em 0;
+  }
+  .control input[type="submit"] {
+    background: #B6AD90;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    height: 45px;
+  }
+  .control input[type="submit"]:hover {
+    opacity: 1;
+  }
+
+input,
+input::placeholder {
+    font-size: 15px;
+}
+
+.control textarea {
+  background-color: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  width: 100%;
+  display: block;
+  padding: 10px;
+  color: #222;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  margin: 1em 0;
+}
+.control textarea[type="submit"] {
+  background: #B6AD90;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.control textarea[type="submit"]:hover {
+  opacity: 1;
+}
+
+textarea,
+textarea::placeholder {
+  font-size: 15px;
+}
+
+.control select {
+  background-color: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  width: 100%;
+  display: block;
+  padding: 10px;
+  color: #222;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  margin: 1em 0;
+}
+.control select[type="submit"] {
+  background: #B6AD90;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+.control select[type="submit"]:hover {
+  opacity: 1;
+}
+
+select,
+select::placeholder {
+  font-size: 15px;
+}
+
+
+  .link {
+    text-align: center;
+  }
+  .link a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+  .link a:hover {
+    opacity: 1;
+  }
+  
+  .txt{
+    text-decoration: none;
+    color:#333333;
+  }
+  .txt:hover{
+      color: rgb(0, 0, 0);
+  }
+  .abs{
+    text-decoration: none;
+  }
+.abs:hover{
+  text-decoration: none;
+  color: white;
+}
+.na{
+  font-size: 16px;
+}
+
+#customBtn {
+  display: inline-block;
+  background: white;
+  color: rgb(0, 0, 0);
+  width: 100%;
+  border-radius: 5px;
+  border: thin solid white;
+  white-space: nowrap;
+  margin-bottom: 15px;
+}
+#customBtn:hover {
+  cursor: pointer;
+}
+span.icon {
+  background: url('https://developers-dot-devsite-v2-prod.appspot.com/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+}
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  /* font-family: 'Roboto', sans-serif; */
+  }

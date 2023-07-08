@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bookbuddy</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href={{url_for('static',filename='css/style.css')}}>
+
+
+</head>
+
+<body>
+
+    <!-- header section starts      -->
+
+    <header>
+
+        <a href="#" class="logo" style="text-transform: lowercase;font-size: 3.5rem;"><img
+                src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+                style="height: 48px; filter: brightness(0); padding-bottom: 5px;">bookbuddy</a>
+
+        <div class="icons">
+            <i class="fas fa-bars" id="menu-bars"></i>
+            <a href="" class="fas fa-user" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"></a>
+
+        </div>
+
+        <!-- Modal -->
+    </header>
+    <!-- Modal -->
+
+
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle" style="margin:0 20px;"><b>Profile</b></h2>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 25px; margin-right:2rem;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img style="border-radius: 50%;" src="{{url_for('static',filename='images/images.png')}}" class="image-respomsive img-center" />
+                    <div class="modal-header text-center">
+                        <h3 class="modal-title w-100">{{session['name']}}</h3>
+                    </div>
+                </div>
+                <div class="">
+                    <a href="/login"
+                        style="width: 40rem; background: #B6AD90; margin: 5px 5rem 3rem 5rem; border-radius: 12px;"
+                        class="btn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+        integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+        crossorigin="anonymous"></script>
+
+    <section style="padding: 0 10rem 0 10rem; background-color: white;">
+        <button type="button" class="btn"
+            data-bs-toggle="modal" data-bs-target="#bd-example-modal-lg" style="margin-top: 10rem;">Add Book</button>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true" id="bd-example-modal-lg" style="padding: 0;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLongTitle" style="margin:0 20px;">Enter details of
+                            book</h2>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" style="font-size: 25px; margin-right:2rem;">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <section class="order" id="order" style="padding: 0; margin: 0;">
+                            <form action="" method="post">
+                                <div class="inputBox">
+                                    <div class="input">
+                                        <span>Enter Category</span>
+                                        <input type="text" placeholder="Enter category" name="category">
+                                    </div>
+                                    <div class="input">
+                                        <span>Enter title</span>
+                                        <input type="text" placeholder="Enter title" name="title">
+                                    </div>
+                                    <div class="input">
+                                        <span>Enter author name</span>
+                                        <input type="text" placeholder="Enter author name" name="author">
+                                    </div>
+                                </div>
+                                <div class="inputBox">
+                                    <div class="input">
+                                        <span>Enter ratings</span>
+                                        <input type="text" placeholder="Enter rating" name="rating">
+                                    </div>
+                                    <div class="input">
+                                        <span>Enter Price</span>
+                                        <input type="test" placeholder="Enter Price" name="price">
+                                    </div>
+                                </div>
+                                <div class="inputBox">
+                                    <div class="input">
+                                        <span>Enter No. of likes</span>
+                                        <input type="number" placeholder="Enter No. of likes" name="likes">
+                                    </div>
+                                    <div class="input">
+                                        <span>Enter Release Year</span>
+                                        <input type="number" placeholder="Enter Release Year" min="1900" max="2040"
+                                            step="1" name="year">
+                                    </div>
+                                </div>
+                                <div class="inputBox">
+                                    <div class="input" style="width:100%">
+                                        <span>Enter Genre</span>
+                                        <input type="text" placeholder="Enter Genre" name="genre">
+                                    </div>
+                                </div>
+                                <div class="inputBox">
+                                    <div class="input" style="width:100%">
+                                        <span>Enter Summary</span>
+                                        <textarea name="summary" placeholder="Enter Summary" id="" cols="30"
+                                            rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div class="inputBox">
+                                    <div class="input" style="width: 100%;">
+                                        <span>Select Book Cover</span>
+                                        <input type="file" name="file" placeholder="Choose">
+                                    </div>
+                                </div>
+                                <input type="submit" name="section" value="Add now" class="btn">
+                            </form>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="order" id="order">
+        <table class="order1 table table-bordered" style="font-size: 20px;">
+            <thead style="font-size: 20px;">
+                <tr>
+                    <th>Book Id.</th>
+                    <th>Title</th>
+                    <th>Author Name</th>
+                    <!-- <th>Team Mentor</th> -->
+                    <th style="width: 90px; text-align:center;">Delete</th>
+                </tr>
+            </thead>
+            <tbody style="font-size: 18px;">
+                {% if context!=None %}
+                {% for x in context %}
+                <tr>
+                    <td>{{x[0]}}</td>
+                    <td>{{x[1]}}</td>
+                    <td>{{x[2]}}</td>
+
+                    <td style="text-align:center;">
+                        <form action="" method="post">
+                        <button
+                            style="border: none; background-color: transparent; height: 50px;" height="" width=""
+                            type="submit" class="" name="section"  value="{{x[0]}}" /><svg
+                            xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                        </svg></button>
+                    </form>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            {% endif %}
+
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div class="text-right">
+                            <ul class="pagination"> </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+
+
+    <section class="footer">
+        <div class="credit"> <a href="#" class="logo"
+                style="text-transform: lowercase;font-size: 3.5rem; color: black;"><img src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+                    style="height: 48px; filter: brightness(0); padding-bottom: 5px;">bookbuddy</a>
+        </div>
+
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- loader part  -->
+    <div class="loader-container">
+        <img src="{{url_for('static',filename='images/1613600701_82187_gif-url.gif')}}" alt="">
+    </div>
+
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{{url_for('static',filename='js/script1.js')}}"></script>
+
+</body>
+
+</html>

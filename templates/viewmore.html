@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href={{url_for('static',filename='css/style.css')}}>
+
+
+</head>
+
+<body>
+
+    <header>
+
+        <a href="/" class="logo" style="text-transform: lowercase;font-size: 3.5rem;"><img
+                src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+                style="height: 48px; filter: brightness(0); padding-bottom: 5px;">bookbuddy</a>
+                <nav class="navbar" style="margin-left: 500px;">
+                    <a class="active" href="/">home</a>
+                    <a href="/about">about us</a>
+                    <a href="/contact">contact us</a>
+                    <div class="dropdown" style="font-size: 25px;">
+                        <a  type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Genre
+                        </a>
+                        <div class="dropdown-menu" style="font-size: 20px;" aria-labelledby="dropdownMenu2">
+                          <form action="/genre" method="POST">
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="thriller" >Thriller</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="mystery" >Mystery</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="fantasy" >Fantasy</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="scifi" >Sci-fi</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="comedy" >Comedy</button>
+                          </form>
+                        </div>
+                      </div>
+                </nav>
+
+        <div class="icons">
+            <i class="fas fa-bars" id="menu-bars"></i>
+            <i class="fas fa-search" id="search-icon"></i>
+            <!-- <!-- <a href="/wishList.html" class="fas fa-heart"></a> -->
+            <a href="" class="fas fa-user" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1"></a>
+        </div>
+
+        <!-- Modal -->
+    </header>
+    <!-- Modal -->
+
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle" style="margin:0 20px;"><b>Profile</b></h2>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 25px; margin-right:2rem;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img style="border-radius: 50%;" src="{{url_for('static',filename='images/images.png')}}" class="image-respomsive img-center" />
+                    <div class="modal-header text-center">
+                        <h3 class="modal-title w-100">{{session['name']}}</h3>
+                    </div>
+                </div>
+                <div class="">
+                    <a href="/wishlist"
+                        style="width: 40rem; background: #B6AD90; margin: 10px 5rem; border-radius: 12px;"
+                        class="btn">WishList</a>
+                    <br>
+                    <a href="/login"
+                        style="width: 40rem; background: #B6AD90; margin: 5px 5rem 3rem 5rem; border-radius: 12px;"
+                        class="btn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+        integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+        crossorigin="anonymous"></script>
+    <!-- header section ends-->
+
+    <!-- search form  -->
+
+    <form action="" id="search-form" method="post">
+        <input type="search" placeholder="search here..." name="searchbook" id="search-box">
+        <button type="submit" class="fas fa-search" name="section" value="search" style="background:transparent; font-size:3rem;color:white"></button>
+        <i class="fas fa-times" id="close"></i>
+    </form>
+
+    <section class="about" id="about" style="padding:10rem 20rem 0 20rem;">
+        <div class="row">
+            {% if context!=None %}
+            {% for x in context %}
+
+            <div class="image" style="padding:30px">
+                <img src="{{x[3]}}" style="height:50rem; width:30rem; margin-left:12rem" alt="">
+                <h4 style="text-align: center; padding-top:20px; font-size: 2.5rem;"><b>Ratings</b></h4>
+                <div class="stars" style="
+                    text-align:center;">
+                    {% if x[4]==2.5 %}
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                    {% if x[4]==3 %}
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                    {% if x[4]==3.5 %}
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                    {% if x[4]==4 %}
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    {% endif %}
+                    {% if x[4]==4.5 %}
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    {% endif %}
+                    {% if x[4]==5 %}
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="content" style=margin-bottom:15rem>
+                <h2 style="font-size: 4rem; color: black;">{{x[0]}}</h2>
+                <h4 style="float: right; text-align: right; padding-top:20px; font-size: 1.75rem;"><i class="fas fa-heart"></i>  {{ x[6]}}</h4>
+
+                <h3 style="font-size: 3rem; color: black;">{{x[1]}}</h3>
+
+                <p style="color: black;" align="justify">{{x[2]}}</p>
+                <!-- <p>JustforFoodies joins its users with the best cafes and restaurants in the city. They also facilitate platform where users can order food, a cashless payment experience across eateries, rewarding their users with an opportunity of gaining cashback on every bill.</p> -->
+                <div class="icons-container">
+                    <!-- <div class="icons">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>free delivery</span>
+                    </div> -->
+                    <form action="/viewmore1" method="post">
+                       <button class="icons" type="submit" style="background-color: #B6AD90;" name="like" value="{{x[5]}}">
+                        <i class="fas fa-heart"></i>
+                        <span> Like </span>
+                    </button>
+                    </form>
+                    <form action="/viewmore2" method="post">
+                        <button class="icons" type="submit" style="background-color: #B6AD90;" name="wishlist" value="{{x[5]}}">
+                            <i class="fas fa-book"></i>
+                            <span> Want To Read </span>
+                        </button>
+                    </form>
+                    <button class="icons" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                        style="background-color: #B6AD90;">
+                        <i class="fas fa-pen-nib"></i>
+                        <span> Add Review </span>
+                    </button>
+                    <button class="icons" id="rzp-button1"  type="button" style="background-color: #B6AD90;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span> Buy Now </span></button>
+                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                    <script>
+                    var options = {
+                        "key": "rzp_test_DhfZoCvuvrYovO", // Enter the Key ID generated from the Dashboard
+                        "amount": "355.09", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                        "currency": "INR",
+                        "name": "bookbuddy",
+                        "description": "{{x[0]}}",
+                        "image": "{{url_for('static',filename='images/onlysquirrel1 - Copy.png')}}",
+                        "order_id": "{{payment['id']}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                        "handler": function (response){
+                            alert(response.razorpay_payment_id);
+                            alert(response.razorpay_order_id);
+                            alert(response.razorpay_signature)
+                        },
+                        "theme": {
+                            "color": "#B6AD90"
+                        }
+                    };
+                    var rzp1 = new Razorpay(options);
+                    rzp1.on('payment.failed', function (response){
+                            alert(response.error.code);
+                            alert(response.error.description);
+                            alert(response.error.source);
+                            alert(response.error.step);
+                            alert(response.error.reason);
+                            alert(response.error.metadata.order_id);
+                            alert(response.error.metadata.payment_id);
+                    });
+                    document.getElementById('rzp-button1').onclick = function(e){
+                        rzp1.open();
+                        e.preventDefault();
+                    }
+                    </script>
+                </div>
+            </div>
+            
+
+        </div>
+
+    </section>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle" style="font-size: 20px;"><b>Write a review</b></h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 20px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding-bottom: 0;">
+                    <section class="order" id="order" style="padding: 0; margin: 0;">
+                        <form action="" method="post">
+
+                            <div class="inputBox">
+                                <div class="input" style="width:100%">
+                                    <textarea name="review" placeholder="Write a review" id="" cols="30"
+                                        rows="5"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" name="section" value="{{x[5]}}" style="width:100%" class="btn">Add review</button>
+                        </form>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+            {% endif %}
+    <section style="background-color: white; padding-top:0;margin-top:0;">
+        <div id="intro">
+            <div class="bg_big bg_big_green glow">
+                <div id="opac1">
+                    <h1><b>Reviews</b></h1>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        {% if context2!=None %}
+                {% for x1 in context2 %}
+        <div style="padding:0 10rem 1rem 10rem;">
+            <label style="font-size: 20px;"><b>{{x1[0]}}</b></label>
+            <div class="stars" style="text-align:center; display: inline; float: right;padding: 0 0 0 5px;">
+                <form action="/like1" method="post">
+                <button class="fa fa-heart-o" id="btn1" type="submit" style="color: #e30c0c; font-size: 1.5rem;" name="like" value="{{x1[3]}}"></button></form>
+            </div>
+            <h4 style="text-align: right; font-size: 1.5rem;display: inline; float: right;"><b>Like</b></h4>
+            <h4 style="text-align: right; font-size: 1.5rem;display: inline; float: right; margin-right:20px;"><b>{{x1[2]}}
+                    Likes</b></h4>
+            <br>
+            <label style="font-size: 15px;">{{x1[1]}}</label>
+                <hr style="width: 100%;">
+        </div>
+        {% endfor %}
+            {% endif %}
+
+    </section>
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/">home</a>
+                <a href="/about">about us</a>
+                <a href="/contact">contact us</a>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <!-- <a style="font-size: 20px;"; >Phone Number</a> -->
+                <!-- <i class="fas fa-star" style="display:inline-block;"></i> -->
+                <h3 style="display:inline-block; font-size: 18px;"><i class="fa fa-phone"
+                        style="padding: 5px;"></i>Phone Number</h3>
+                <a href="#">+123-456-7890</a>
+                <a href="#">+111-222-3333</a>
+                <h3 style="display:inline-block; font-size: 18px;"><i class="fa fa-envelope"
+                        style="padding: 5px;"></i>Email</h3>
+                <a href="#" style="text-transform: lowercase;">bookbuddy@gmail.com</a>
+            </div>
+
+            <div class="box">
+                <h3>Connect</h3>
+                <a href="https://www.facebook.com/"><i class="fa fa-facebook"
+                        style="padding: 5px; color: black;"></i>facebook</a>
+                <a href="https://www.twitter.com/"><i class="fa fa-twitter" style="padding: 5px;"></i>twitter</a>
+                <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="padding: 5px;"></i>instagram</a>
+                <a href="https://www..com/"><i class="fa fa-linkedin" style="padding: 5px;"></i>linkedin</a>
+            </div>
+
+        </div>
+
+        <div class="credit"> <a href="/" class="logo"
+                style="text-transform: lowercase;font-size: 3.5rem; color: black;"><img src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+                    style="height: 48px; filter: brightness(0); padding-bottom: 5px;">bookbuddy</a>
+        </div>
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- loader part  -->
+    <div class="loader-container">
+        <img src="{{url_for('static',filename='images/searching.gif')}}" alt="">
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{{url_for('static',filename='js/script.js')}}"></script>
+<script>
+    const btn = document.getElementById('btn1');
+    btn.addEventListener('click', function onClick() {
+    btn.style.backgroundColor = 'red';
+    });
+</script>
+</body>
+
+</html>

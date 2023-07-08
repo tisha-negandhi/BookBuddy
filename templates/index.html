@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bookbuddy</title>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+
+    <!-- font awesome cdn link  -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href={{url_for('static',filename='css/style.css')}}>
+  </head>
+
+  <body>
+    <!-- header section starts      -->
+
+    <header>
+      <a
+        href="/"
+        class="logo"
+        style="text-transform: lowercase; font-size: 3.5rem"
+        ><img
+          src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+          style="height: 48px; filter: brightness(0); padding-bottom: 5px"
+        />bookbuddy</a
+      >
+      <nav class="navbar" style="margin-left: 500px">
+        <a class="active" href="/">home</a>
+        <a href="/about">about us</a>
+        <a href="/contact">contact us</a>
+        <div class="dropdown" style="font-size: 25px">
+          <a
+            type="button"
+            id="dropdownMenu2"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Genre
+          </a>
+          <div
+            class="dropdown-menu"
+            style="font-size: 20px"
+            aria-labelledby="dropdownMenu2"
+          >
+            <form action="/genre" method="POST">
+              <button
+                class="dropdown-item"
+                type="submit"
+                name="section"
+                value="thriller"
+                style="background: transparent; color: black"
+              >
+                Thriller
+              </button>
+              <button
+                class="dropdown-item"
+                type="submit"
+                name="section"
+                value="mystery"
+                style="background: transparent; color: black"
+              >
+                Mystery
+              </button>
+              <button
+                class="dropdown-item"
+                type="submit"
+                name="section"
+                value="fantasy"
+                style="background: transparent; color: black"
+              >
+                Fantasy
+              </button>
+              <button
+                class="dropdown-item"
+                type="submit"
+                name="section"
+                value="scifi"
+                style="background: transparent; color: black"
+              >
+                Sci-fi
+              </button>
+              <button
+                class="dropdown-item"
+                type="submit"
+                name="section"
+                value="comedy"
+                style="background: transparent; color: black"
+              >
+                Comedy
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <i class="fas fa-search" id="search-icon"></i>
+        <!-- <!-- <a href="/wishList.html" class="fas fa-heart"></a> -->
+        {% if session['logged_in'] %}
+        <a
+          href=""
+          class="fas fa-user"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalCenter1"
+        ></a>
+        {% else %}
+        <a
+          href=""
+          class="fas fa-user"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalCenter"
+        ></a>
+        {% endif %}
+      </div>
+
+      <!-- Modal -->
+    </header>
+    {% if session['logged_in'] %}
+
+    <div
+      class="modal fade"
+      id="exampleModalCenter1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2
+              class="modal-title"
+              id="exampleModalLongTitle"
+              style="margin: 0 20px"
+            >
+              <b>Profile</b>
+            </h2>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span
+                aria-hidden="true"
+                style="font-size: 25px; margin-right: 2rem"
+                >&times;</span
+              >
+            </button>
+          </div>
+          <div class="modal-body">
+            <img
+              style="border-radius: 50%"
+              src="{{url_for('static',filename='images/images.png')}}"
+              class="image-respomsive img-center"
+            />
+            <div class="modal-header text-center">
+              <h3 class="modal-title w-100">{{session['name']}}</h3>
+            </div>
+          </div>
+          <div class="">
+            <a
+              href="/wishlist"
+              style="
+                width: 40rem;
+                background: #b6ad90;
+                margin: 10px 5rem;
+                border-radius: 12px;
+              "
+              class="btn"
+              >WishList</a
+            >
+            <br />
+            <a
+              href="/login"
+              style="
+                width: 40rem;
+                background: #b6ad90;
+                margin: 5px 5rem 3rem 5rem;
+                border-radius: 12px;
+              "
+              class="btn"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+      crossorigin="anonymous"
+    ></script>
+    {% else %}
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2
+              class="modal-title"
+              id="exampleModalLongTitle"
+              style="margin: 0 20px"
+            >
+              <b>Profile</b>
+            </h2>
+            <button
+              type="button"
+              class="close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span
+                aria-hidden="true"
+                style="font-size: 25px; margin-right: 2rem"
+                >&times;</span
+              >
+            </button>
+          </div>
+          <div class="modal-body">
+            <img
+              style="border-radius: 50%"
+              src="{{url_for('static',filename='images/images.png')}}"
+              class="image-respomsive img-center"
+            />
+            <div class="modal-header text-center">
+              <!-- <h3 class="modal-title w-100">Username</h3> -->
+            </div>
+          </div>
+          <div class="">
+            <a
+              href="/login"
+              style="
+                width: 40rem;
+                background: #b6ad90;
+                margin: 10px 5rem;
+                border-radius: 12px;
+              "
+              class="btn"
+              >Login</a
+            >
+            <br />
+            <a
+              href="/register"
+              style="
+                width: 40rem;
+                background: #b6ad90;
+                margin: 5px 5rem 3rem 5rem;
+                border-radius: 12px;
+              "
+              class="btn"
+              >Register</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+      crossorigin="anonymous"
+    ></script>
+    {% endif %}
+    <!-- header section ends-->
+
+    <!-- search form  -->
+
+    <form action="" id="search-form" method="post">
+      <input
+        type="search"
+        placeholder="search here..."
+        name="searchbook"
+        id="search-box"
+      />
+      <button
+        type="submit"
+        class="fas fa-search"
+        name="section"
+        value="search"
+        style="background: transparent; font-size: 3rem; color: white"
+      ></button>
+      <i class="fas fa-times" id="close"></i>
+    </form>
+
+    <!-- home section starts  -->
+
+    <section class="home" id="home">
+      <div class="iconic">
+        <i
+          class="fa-solid fa-random"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalCenter3"
+        ></i>
+        <!-- <a href="" class="fas fa-user" ></a> -->
+      </div>
+      <!-- Large modal -->
+      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large
+            modal</button> -->
+
+      <div
+        class="modal fade bd-example-modal-lg"
+        id="exampleModalCenter3"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myLargeModalLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLongTitle">
+                <b>Shuffle</b>
+              </h2>
+              <button
+                type="button"
+                class="close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span
+                  aria-hidden="true"
+                  style="font-size: 25px; margin-right: 2rem"
+                  >&times;</span
+                >
+              </button>
+            </div>
+            <div class="modal-body" style="margin: 5px 15px 0 15px">
+              <form action="/mood" method="post">
+                <div class="form-group">
+                  <label
+                    for="recipient-name"
+                    class="col-form-label"
+                    style="font-size: 20px"
+                    >What kind of mood would you like the book to evoke while
+                    you read it?</label
+                  >
+                  <div class="row" style="padding-top: 15px">
+                    <div class="col-2">
+                      <button type="submit" name="mood" value="happy">
+                        <img
+                          src="static/images/em/happy1.webp"
+                          class="img-fluid"
+                        />
+                      </button>
+                      <!-- <label style="font-size:20px;">Happy</label> -->
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" name="mood" value="romantic">
+                        <img
+                          src="static/images/em/romantic1.webp"
+                          class="img-fluid"
+                        />
+                      </button>
+                      <!-- <label style="font-size:20px;">Romantic</label> -->
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" name="mood" value="uplifting">
+                        <img
+                          src="static/images/em/uplifting2.webp"
+                          class="img-fluid"
+                        />
+                      </button>
+                      <!-- <label style="font-size:20px;">Uplifting</label> -->
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" name="mood" value="suspense">
+                        <img
+                          src="static/images/em/suspenseful2.jpg"
+                          class="img-fluid"
+                        />
+                      </button>
+                      <!-- <label style="font-size:20px;">Suspense</label> -->
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" name="mood" value="scary">
+                        <img
+                          src="static/images/em/scary2.jpg"
+                          class="img-fluid"
+                        />
+                      </button>
+                      <!-- <label style="font-size:20px;">Scared</label> -->
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" name="mood" value="neutral">
+                        <img
+                          src="static/images/em/neutral3.jpg"
+                          class="img-fluid"
+                        />
+                      </button>
+                      <!-- <label style="font-size:20px;">Neutral</label> -->
+                    </div>
+                  </div>
+                  <div class="row" style="padding-top: 15px">
+                    <div class="col-2 text-center">
+                      <button
+                        type="submit"
+                        name="mood"
+                        value="happy"
+                        style="font-size: 15px; background: white"
+                      >
+                        Happy
+                      </button>
+                    </div>
+                    <div class="col-2 text-center">
+                      <button
+                        type="submit"
+                        name="mood"
+                        value="romantic"
+                        style="font-size: 15px; background: white"
+                      >
+                        Romantic
+                      </button>
+                    </div>
+                    <div class="col-2 text-center">
+                      <button
+                        type="submit"
+                        name="mood"
+                        value="uplifting"
+                        style="font-size: 15px; background: white"
+                      >
+                        Uplifting
+                      </button>
+                    </div>
+                    <div class="col-2 text-center">
+                      <button
+                        type="submit"
+                        name="mood"
+                        value="suspense"
+                        style="font-size: 15px; background: white"
+                      >
+                        Suspense
+                      </button>
+                    </div>
+                    <div class="col-2 text-center">
+                      <button
+                        type="submit"
+                        name="mood"
+                        value="scary"
+                        style="font-size: 15px; background: white"
+                      >
+                        Scary
+                      </button>
+                    </div>
+                    <div class="col-2 text-center">
+                      <button
+                        type="submit"
+                        name="mood"
+                        value="neutral"
+                        style="font-size: 15px; background: white"
+                      >
+                        Neutral
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!--<div class="">
+                        <button href="#"
+                        style="width: 76.5rem; background: #B6AD90; margin: 5px 15px 3rem 15px; border-radius: 12px;"
+                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter45" class="btn" data-bs-dismiss="modal">Submit</button>
+                    </div>-->
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="exampleModalCenter45"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-lg modal-dialog-centered"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLongTitle">
+                <b>I'm sure you'll like this</b>
+              </h2>
+              <button
+                type="button"
+                class="close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              >
+                <span
+                  aria-hidden="true"
+                  style="font-size: 25px; margin-right: 2rem"
+                  >&times;</span
+                >
+              </button>
+            </div>
+            <div class="modal-body">
+              <img
+                src="static/images/fivefeet.jpeg"
+                style="float: left; margin-right: 1rem"
+              />
+              <div style="margin-left: 150px">
+                <h2 style="font-size: 30px; margin-bottom: 10px">
+                  <b>Book Title</b>
+                </h2>
+                <hr />
+                <h2>By Author Name</h2>
+                <div
+                  class="stars"
+                  style="
+                    font-size: 15px;
+                    color: goldenrod;
+                    margin: 10px 0 10px 0;
+                  "
+                >
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h4>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab
+                  perferendis ratione dignissimos consequatur omnis, sit debitis
+                  minus repellendus aliquid temporibus excepturi autem aliquam
+                  voluptatem, dicta dolore cum nostrum sed exercitationem. Lorem
+                  ipsum dolor sit amet consectetur adipisicing elit. Excepturi
+                  facilis non consequatur numquam, pariatur ea tenetur veritatis
+                  reiciendis, tempore ab cupiditate molestias sint? Facere
+                  ratione consectetur odit laboriosam fugit repellendus!
+                </h4>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" style=" background: #B6AD90; margin: 5px 15px 3rem 15px; border-radius: 12px;" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+              <button
+                type="button"
+                style="background: #b6ad90; border-radius: 12px"
+                class="btn btn-primary"
+              >
+                Read More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-container home-slider">
+        <div class="swiper-wrapper wrapper">
+          <div class="swiper-slide slide">
+            <div class="image">
+              <img
+                src="{{url_for('static',filename='images/jonas-jacobsson-0FRJ2SCuY4k-unsplash (1).jpg')}}"
+                alt=""
+              />
+              <div class="centered">
+                <b
+                  >A great book should leave you with many experiences, and
+                  slightly exhausted at the end. You live several lives while
+                  reading.</b
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide slide">
+            <div class="image">
+              <img
+                src="{{url_for('static',filename='images/vrinceanu-iulia-EL_1-pVO2gw-unsplash.jpg')}}"
+                alt=""
+              />
+              <div class="centered1">
+                <b
+                  >Reading is a conversation. All books talk. But a good book
+                  listens as well.</b
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide slide">
+            <div class="image">
+              <img
+                src="{{url_for('static',filename='images/freestocks-OfaDD5o8hpk-unsplash.jpg')}}"
+                alt=""
+              />
+              <div class="centered2">
+                <b>A reader lives a thousand lives before he dies.</b>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+    <section style="background-color: #fff; width: 0"></section>
+    <section class="dishes" id="dishes" style="padding-top: 0">
+      <div id="intro">
+        <div class="bg_big bg_big_green glow">
+          <div id="opac1">
+            <h1><b>Trending</b></h1>
+          </div>
+        </div>
+      </div>
+      <!-- <h3 class="sub-heading"> Trending </h3> -->
+      <br /><br />
+      <div class="box-container">
+        {% for i in range(book_name|length-30) %}
+        <div class="box">
+          <form action="/likes" method="POST">
+            <button
+              type="submit"
+              name="like"
+              value="{{ book_name[i] }}"
+              class="fas fa-heart"
+            ></button>
+          </form>
+          <form action="/wish" method="POST">
+            <button
+              type="submit"
+              name="wishlist"
+              value="{{ book_name[i] }}"
+              class="fas fa-eye"
+            ></button>
+          </form>
+          <img src="{{ image[i] }}" alt="" />
+          <h4 style="font-size: 20px">{{ book_name[i] }}</h4>
+          <h5 style="font-size: 14px">{{ author[i] }}</h5>
+          <div class="stars">
+            {% if rating[i] <= 2.5 and rating[i] >0 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if rating[i] <=3 and rating[i] >2.5 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if rating[i] <=3.5 and rating[i] >3 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if rating[i] <=4 and rating[i] >=3.5 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if rating[i] <=4.5 and rating[i] >4 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            {% endif %} {% if rating[i] >4.5 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            {% endif %}
+          </div>
+          <form action="" method="post">
+            <button
+              type="submit"
+              name="section"
+              value="{{ book_name[i] }}"
+              class="btn"
+            >
+              View More
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+      <br />
+    </section>
+    <!-- menu section ends -->
+
+    <!-- review section starts  -->
+
+    <section class="review" id="review">
+      <h3 class="sub-heading">reviews</h3>
+      <h2 class="heading">what they say</h2>
+
+      <div class="swiper-container review-slider">
+        <div class="swiper-wrapper">
+          {% if context1!=None %} {% for x1 in context1 %}
+          <div class="swiper-slide slide">
+            <i class="fas fa-quote-right"></i>
+            <div class="user">
+              <img
+                src="{{url_for('static',filename='images/images.png')}}"
+                alt=""
+              />
+              <div class="user-info">
+                <h3>{{x1[0]}}</h3>
+                <label class="cap" style="font-size: 15px"> {{x1[2]}} </label>
+              </div>
+            </div>
+            <p>{{x1[1]}}</p>
+          </div>
+
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+    </section>
+    <section class="dishes" id="dishes">
+      {% if data %}
+      <div id="intro">
+        <div class="bg_big bg_big_green glow">
+          <div id="opac1">
+            <h1><b>Books you may like</b></h1>
+          </div>
+        </div>
+      </div>
+
+      <!-- <h3 class="sub-heading"> Trending </h3> -->
+      <br /><br />
+      <div class="box-container">
+        {% for i in data %}
+        <div class="box">
+          <form action="/likes" method="POST">
+            <button
+              type="submit"
+              name="like"
+              value="{{x[4]}}"
+              class="fas fa-heart"
+            ></button>
+          </form>
+          <form action="/wish" method="POST">
+            <button
+              type="submit"
+              name="wishlist"
+              value="{{x[4]}}"
+              class="fas fa-eye"
+            ></button>
+          </form>
+
+          <img src="{{i[2]}}" alt="" />
+          <h4 style="font-size: 20px">{{i[0]}}</h4>
+          <h5 style="font-size: 14px">{{i[1]}}</h5>
+          <div class="stars">
+            {% if x==2.5 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if x==3 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if x==3.5 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if x==4 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            {% endif %} {% if x==4.5 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            {% endif %} {% if x==5 %}
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            {% endif %}
+          </div>
+          <form action="" method="post">
+            <button type="submit" name="section" value="{{x[4]}}" class="btn">
+              View More
+            </button>
+          </form>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+    </section>
+
+    <!-- order section ends -->
+
+    <!-- footer section starts  -->
+
+    <section class="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>quick links</h3>
+          <a href="/">home</a>
+          <a href="/about">about us</a>
+          <a href="/contact">contact us</a>
+        </div>
+
+        <div class="box">
+          <h3>contact info</h3>
+          <!-- <a style="font-size: 20px;"; >Phone Number</a> -->
+          <!-- <i class="fas fa-star" style="display:inline-block;"></i> -->
+          <h3 style="display: inline-block; font-size: 18px">
+            <i class="fa fa-phone" style="padding: 5px"></i>Phone Number
+          </h3>
+          <a href="#">+123-456-7890</a>
+          <a href="#">+111-222-3333</a>
+          <h3 style="display: inline-block; font-size: 18px">
+            <i class="fa fa-envelope" style="padding: 5px"></i>Email
+          </h3>
+          <a href="#" style="text-transform: lowercase">bookbuddy@gmail.com</a>
+        </div>
+
+        <div class="box">
+          <h3>Connect</h3>
+          <a href="https://www.facebook.com/"
+            ><i class="fa fa-facebook" style="padding: 5px; color: black"></i
+            >facebook</a
+          >
+          <a href="https://www.twitter.com/"
+            ><i class="fa fa-twitter" style="padding: 5px"></i>twitter</a
+          >
+          <a href="https://www.instagram.com/"
+            ><i class="fa fa-instagram" style="padding: 5px"></i>instagram</a
+          >
+          <a href="https://www..com/"
+            ><i class="fa fa-linkedin" style="padding: 5px"></i>linkedin</a
+          >
+        </div>
+      </div>
+
+      <div class="credit">
+        <a
+          href="#"
+          class="logo"
+          style="text-transform: lowercase; font-size: 3.5rem; color: black"
+          ><img
+            src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+            style="height: 48px; filter: brightness(0); padding-bottom: 5px"
+          />bookbuddy</a
+        >
+      </div>
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- loader part  -->
+    <div class="loader-container">
+      <img
+        src="{{url_for('static',filename='images/1613600701_82187_gif-url.gif')}}"
+        alt=""
+      />
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{{url_for('static',filename='js/script.js')}}"></script>
+  </body>
+</html>

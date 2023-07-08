@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+
+
+</head>
+
+<body>
+
+    <!-- header section starts      -->
+
+    <header>
+
+        <a href="#" class="logo" style="text-transform: lowercase;font-size: 3.5rem;"><img
+                src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+                style="height: 48px; filter: brightness(0); padding-bottom: 5px;">bookbuddy</a>
+                <nav class="navbar" style="margin-left: 500px;">
+                    <a class="active" href="/">home</a>
+                    <a href="/about">about us</a>
+                    <a href="/contact">contact us</a>
+                    <div class="dropdown" style="font-size: 25px;">
+                        <a  type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Genre
+                        </a>
+                        <div class="dropdown-menu" style="font-size: 20px;" aria-labelledby="dropdownMenu2">
+                          <form action="/genre" method="POST">
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="thriller" >Thriller</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="mystery" >Mystery</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="fantasy" >Fantasy</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="scifi" >Sci-fi</button>
+                          <button class="dropdown-item" style="background:transparent;color:black;" type="submit" name="section" value="comedy" >Comedy</button>
+                          </form>
+                        </div>
+                      </div>
+                </nav>
+
+        <div class="icons">
+            <i class="fas fa-bars" id="menu-bars"></i>
+            <i class="fas fa-search" id="search-icon"></i>
+            <!-- <!-- <a href="/wishList.html" class="fas fa-heart"></a> -->
+            <a href="/addToCart.html" class="fas fa-user" data-bs-toggle="modal"
+                data-bs-target="#exampleModalCenter1"></a>
+        </div>
+
+        <!-- Modal -->
+    </header>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle" style="margin:0 20px;"><b>Profile</b></h2>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 25px; margin-right:2rem;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img style="border-radius: 50%;" src="{{url_for('static',filename='images/images.png')}}" class="image-respomsive img-center" />
+                    <div class="modal-header text-center">
+                        <h3 class="modal-title w-100">{{session['name']}}</h3>
+                    </div>
+                </div>
+                <div class="">
+                    <a href="/wishlist"
+                        style="width: 40rem; background: #B6AD90; margin: 10px 5rem; border-radius: 12px;"
+                        class="btn">WishList</a>
+                    <br>
+                    <a href="/login"
+                        style="width: 40rem; background: #B6AD90; margin: 5px 5rem 3rem 5rem; border-radius: 12px;"
+                        class="btn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+        integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+        crossorigin="anonymous"></script>
+    <!-- header section ends-->
+
+    <!-- search form  -->
+
+    <form action="" id="search-form" method="post">
+        <input type="search" placeholder="search here..." name="searchbook" id="search-box">
+        <button type="submit" class="fas fa-search" style="background:transparent; font-size:3rem;color:white"></button>
+        <i class="fas fa-times" id="close"></i>
+    </form>
+
+
+    <br>
+    <br>
+    <section class="dishes" id="dishes" style="padding-top: 5rem;">
+        <br><br><br>
+
+        <div id="intro">
+            <div class="bg_big bg_big_green glow">
+                <div id="opac1">
+                    <h1 style="font-size: 35px;"><b>About Us</b></h1>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="box-container" style="padding: 10px 0px;">
+            <div class="box" style="box-shadow: none;padding: 0;">
+                <div style="width: 50%; float: left;">
+                    <img src="{{url_for('static',filename='images/how-to-format-a-book-3.jpg')}}" alt=""
+                        style="float:left;height: 300px; width: 100%;height: auto;">
+                </div>
+
+                <br>
+                <div style="width:50%; float: right; padding: 0 3rem ;">
+                    <br><br>
+                    <h4 style="font-size: 30px; float: left;">Book Lovers,</h4><br><br><br><br>
+                    <p style="line-height: 2; text-align: left; font-size: 20px; float: left;">Stop us if you’ve heard
+                        this one before: you’ve just finished a mind-blowing book and you need to hear some discussion
+                        about it. What do you do? You can dive straight into our website and search for books you want
+                        reviews on Here’s another scenario: you’ve finished reading a novel and now you’re searching for
+                        something to fill the void.</p><br><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-container" style="padding: 20px 0px;" background="transparent">
+            <div class="box" style="box-shadow: none;">
+                <div style="width: 50%; float: right;">
+                    <img src="{{url_for('static',filename='images/books-everyone-should-read.jpeg')}}" alt=""
+                        style="float:right ;height: 300px; width: 100%;height: auto;">
+                </div>
+
+                <br>
+                <div style="width: 50%; float: right; padding: 0 3rem ;">
+                    <br><br>
+                    <p text-align="justify" style="line-height: 2;font-size: 20px; text-align: left;"> Maybe you want more of the same, or maybe something completely
+                        different to switch things up. You’ll probably also scour the Internet for ratings and
+                        trustworthy recommendations. Unfortunately, not every one of
+                        them features a wide enough variety to help you. But don’t worry: we’ve got you covered with one
+                        of the best book review sites to satisfy the bookworm in you.</p>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+    <section class="dishes" id="dishes" style="padding-top: 0;background:#fff;">
+        <div id="intro">
+            <div class="bg_big bg_big_green glow">
+                <div id="opac1">
+                    <h1><b>Group members</b></h1>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="box-container" style="gap: 6rem;">
+            <div class="box">
+                <img src="{{url_for('static',filename='images/mishika.jpg')}}" alt="" style="border-radius: 6px;">
+                <h4 style="font-size: 25px;">mishika vachhani</h4>
+                <div class="stars">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                    <a href="https://www.twitter.com/"><i class="fa fa-twitter" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fa fa-linkedin" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{url_for('static',filename='images/purval.jpeg')}}" alt="" style="border-radius: 6px;">
+                <h4 style="font-size: 25px;">purval dhumale</h4>
+                <div class="stars">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                    <a href="https://www.twitter.com/"><i class="fa fa-twitter" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fa fa-linkedin" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{url_for('static',filename='images/tisha.jpeg')}}" alt="" style="border-radius: 6px;">
+                <h4 style="font-size: 25px;">tisha negandhi</h4>
+                <div class="stars">
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                    <a href="https://www.twitter.com/"><i class="fa fa-twitter" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                    <a href="https://www.linkedin.com/"><i class="fa fa-linkedin" style="padding: 0 0.5rem;font-size: 2rem; color: black;"></i></a>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+<br>
+<br>
+
+<section class="dishes" id="dishes" style="padding-top: 0;background:#fff;">
+    <h1 class="bha">Join the millions of happy readers</h1>
+
+    <br><br>
+    <div class="box-container" style="gap: 6rem;">
+        <div class="box">
+            
+            <div class="stars">
+                <p style="font-size:50px">&#128516;</p>  
+            </div>
+            <p style="font-size: 15px;"> 
+                
+                "I would tell anyone to just sign up without reservation. I now have more books than I can read in a lifetime."</p>
+                <br>
+                
+                <p style="font-size: 15px;">Suzie M.</p>
+                <p style="font-size: 15px;">AUBURN, WA</p>
+            
+        </div>
+        <div class="box">
+           
+            <div class="stars">
+                <p style="font-size:50px">&#128516;</p>
+            </div>
+            <p style="font-size: 15px;"> 
+                
+                "I would tell anyone to just sign up without reservation. I now have more books than I can read in a lifetime."</p>
+                <br>
+                
+                <p style="font-size: 15px;">Suzie M.</p>
+                <p style="font-size: 15px;">AUBURN, WA</p>
+            
+        </div>
+        <div class="box">
+           
+            <div class="stars">
+                <p style="font-size:50px">&#128516;</p>
+            </div>
+            <p style="font-size: 15px;"> 
+                
+                "I would tell anyone to just sign up without reservation. I now have more books than I can read in a lifetime."</p>
+                <br>
+                
+                <p style="font-size: 15px;">Suzie M.</p>
+                <p style="font-size: 15px;">AUBURN, WA</p>
+            
+        </div>
+    </div>
+    <br>
+</section>
+
+    <br>
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/">home</a>
+                <a href="/about">about us</a>
+                <a href="/contact">contact us</a>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <!-- <a style="font-size: 20px;"; >Phone Number</a> -->
+                <!-- <i class="fas fa-star" style="display:inline-block;"></i> -->
+                <h3 style="display:inline-block; font-size: 18px;"><i class="fa fa-phone"
+                        style="padding: 5px;"></i>Phone Number</h3>
+                <a href="#">+123-456-7890</a>
+                <a href="#">+111-222-3333</a>
+                <h3 style="display:inline-block; font-size: 18px;"><i class="fa fa-envelope"
+                        style="padding: 5px;"></i>Email</h3>
+                <a href="#" style="text-transform: lowercase;">bookbuddy@gmail.com</a>
+            </div>
+
+            <div class="box">
+                <h3>Connect</h3>
+                <a href="https://www.facebook.com/"><i class="fa fa-facebook" style="padding: 5px;"></i>facebook</a>
+                <a href="https://www.twitter.com/"><i class="fa fa-twitter" style="padding: 5px;"></i>twitter</a>
+                <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="padding: 5px;"></i>instagram</a>
+                <a href="https://www..com/"><i class="fa fa-linkedin" style="padding: 5px;"></i>linkedin</a>
+            </div>
+
+        </div>
+
+        <div class="credit"> <a href="/" class="logo"
+                style="text-transform: lowercase;font-size: 3.5rem; color: black;"><img src="{{url_for('static',filename='images/onlysquirrel1.png')}}"
+                    style="height: 48px; filter: brightness(0); padding-bottom: 5px;">bookbuddy</a>
+        </div>
+
+    </section>
+
+    <!-- footer section ends -->
+
+    <!-- loader part  -->
+    <div class="loader-container">
+        <img src="{{url_for('static',filename='images/1613600701_82187_gif-url.gif')}}" alt="">
+    </div>
+
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="{{url_for('static',filename='js/script.js')}}"></script>
+
+</body>
+
+</html>
